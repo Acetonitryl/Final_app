@@ -36,8 +36,8 @@ FinalApp::Application.configure do
     address:               'smtp.gmail.com',
     port:                   587,
     domain:                'gmail.com',
-    user_name:             'tymek.test@gmail.com',
-    password:              'krewetka13',
+    user_name:             ENV['gmail_user'],
+    password:              ENV['gmail_password'],
     authentication:        'plain',
     enable_starttls_auto:  true }
 end

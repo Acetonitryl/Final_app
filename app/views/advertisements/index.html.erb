@@ -1,1 +1,45 @@
-bla
+<h1 class="page-header">Ogłoszenia</h1>
+
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th>Imię</th>
+			<th>Nazwisko</th>
+			<th>Email</th>
+			<th>Numer telefonu</th>
+			<th>Miejscowość</th>
+			<th>Cena</th>
+			<th>Coś o sobie</th>
+			<th>Rodzaj kursu</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @advertisements.each do |add| %>
+			<tr>
+				<td><%= add.first_name %></td>
+				<td><%= add.last_name %></td>
+				<td><%= add.email %></td>
+				<td><%= add.phone_number %></td>
+				<td><%= add.town %></td>
+				<td><%= add.price %></td>
+				<td><%= add.bio %></td>
+				<td><%= add.tags.to_a.join ", " %></td>
+				<% if user_signed_in? %>
+					<td><%= link_to 'Edycja', edit_advertisement_path(add), class: 'btn btn-default btn-xs' %></td>
+					<td><%= link_to 'Usuń ogłoszenie', advertisement_path(add), confirm: "Jesteś pewien?", method: :delete, class: 'btn btn-xs btn-danger' %></td>
+				<%end%>
+		  </tr>	
+		<%end%>
+</table>
+
+<div class="tag_cloud">
+	<%= tag_cloud Advertisement.tag_counts, %w[s m l] do |tag, css_class| %>
+		<%= link_to tag.name, tag_path(tag.name), class: css_class, class: 'btn btn-default btn-xs' %>
+	<% end %>
+</div>
+
+<%=link_to "Wszystkie ogłoszenia", root_path, class: 'btn btn-primary' %>
+<% if current_user %>
+<%= link_to 'Nowe ogłoszenie', new_advertisement_path, class: 'btn btn-primary' %>
+<%end%>
+

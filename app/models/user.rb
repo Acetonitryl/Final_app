@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   after_create :send_email
   has_many :advertisements
+  letsrate_rater
 
   private
 

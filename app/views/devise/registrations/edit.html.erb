@@ -1,0 +1,29 @@
+<h2>Edycja <%= resource_name.to_s.humanize %></h2>
+
+<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
+  <%= devise_error_messages! %>
+
+  <div><%= f.label :email %><br />
+  <%= f.email_field :email, :autofocus => true %></div>
+
+  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+    <div>Oczekiwanie na potwierdzenie: <%= resource.unconfirmed_email %></div>
+  <% end %>
+
+  <div><%= f.label :hasło %> <i>(zostaw puste jeśli nie chcesz zmienić hasła)</i><br />
+  <%= f.password_field :password, :autocomplete => "off" %></div>
+
+  <div><%= f.label :potwierdź_hasło %><br />
+  <%= f.password_field :password_confirmation %></div>
+
+  <div><%= f.label :aktualne_hasło %> <i>(potrzebne aktualne hasło aby zaakceptować zmiany)</i><br />
+  <%= f.password_field :current_password %></div>
+
+  <div><%= f.submit "Uaktualnij" %></div>
+<% end %>
+
+<h3>Usuń konto</h3>
+
+<p>Niezadowolony? <%= button_to "Usuń konto", registration_path(resource_name), :data => { :confirm => "Jesteś pewien?" }, :method => :delete %></p>
+
+<%= link_to "Wstecz", :back %>
