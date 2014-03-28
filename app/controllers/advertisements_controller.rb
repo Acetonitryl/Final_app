@@ -10,7 +10,7 @@ class AdvertisementsController < ApplicationController
 		@advertisement.user = current_user
 		if @advertisement.save
 			flash[:notice] = "Ogłoszczenie zostało utworzone"
-			redirect_to advertisement_path(@advertisement)
+			redirect_to advertisements_path
 		else
 			flash[:notice] = "Dane niepoprawne"
 			render 'new'
